@@ -11,3 +11,11 @@ def get_starships(page: int = Query(1, ge=1)):
     params = {"page": page}
     data = fetch_data("starships", params)
     return data
+
+@router.get("/{starship_id}")
+def get_starship(starship_id: int):
+    """
+    This endpoint retrieves details of a specific Star Wars starship by its ID from the SWAPI.
+    """
+    data = fetch_data(f"starships/{starship_id}")
+    return data

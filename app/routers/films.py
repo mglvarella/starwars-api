@@ -12,3 +12,11 @@ def get_films(page: int = Query(1, ge=1)):
     data = fetch_data("films", params)
     return data
 
+
+@router.get("/{film_id}")
+def get_film(film_id: int):
+    """
+    This endpoint retrieves details of a specific Star Wars film by its ID from the SWAPI.
+    """
+    data = fetch_data(f"films/{film_id}")
+    return data
