@@ -4,11 +4,18 @@ from app.services.swapi_service import fetch_data
 router = APIRouter()
 
 @router.get("/")
-def get_people(page: int = Query(1, ge=1)):
+def get_people(
+    page: int = Query(1, ge=1),
+    search: str | None = Query(default= None, description="Search people by name")
+    ):
     """
     This endpoint retrieves a paginated list of Star Wars people from the SWAPI.
     """
     params = {"page": page}
+    
+    if search:
+        params["search"] = search
+
     data = fetch_data("people", params)
     return data
 

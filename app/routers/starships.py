@@ -4,11 +4,18 @@ from app.services.swapi_service import fetch_data
 router = APIRouter()
 
 @router.get("/")
-def get_starships(page: int = Query(1, ge=1)):
+def get_starships(
+    page: int = Query(1, ge=1),
+    search: str | None = Query(default= None, description="Search starships by name")
+    ):
     """
     This endpoint retrieves a paginated list of Star Wars starships from the SWAPI.
     """
     params = {"page": page}
+
+    if search:
+        params["search"] = search
+
     data = fetch_data("starships", params)
     return data
 
