@@ -1,28 +1,25 @@
 from fastapi import APIRouter, Query
-from app.services.swapi_service import fetch_data
+from app.services.planets_service import PlanetsService
 
 router = APIRouter()
 
 @router.get("/")
 def get_planets(
     page: int = Query(1, ge=1),
-    search: str | None = Query(default= None, description="Search planets by name")
-    ):
+    search: str | None = Query(default=None, description="Search planets by name")
+):
     """
     This endpoint retrieves a paginated list of Star Wars planets from the SWAPI.
     """
     params = {"page": page}
-
     if search:
         params["search"] = search
 
-    data = fetch_data("planets", params)
-    return data
+    return PlanetsService.fetch_planets(params)
 
 @router.get("/{planet_id}")
 def get_planet(planet_id: int):
     """
     This endpoint retrieves details of a specific Star Wars planet by its ID from the SWAPI.
     """
-    data = fetch_data(f"planets/{planet_id}")
-    return data
+    return PlanetsService.fetch_planet_by_id(planet_id)

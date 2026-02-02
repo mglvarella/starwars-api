@@ -1,28 +1,25 @@
 from fastapi import APIRouter, Query
-from app.services.swapi_service import fetch_data
+from app.services.species_service import SpeciesService
 
 router = APIRouter()
 
 @router.get("/")
 def get_species(
-    page: int = Query(1, ge=1, description="Page number for pagination"),
-    search: str | None = Query(default= None, description="Search species by name")
-    ):
+    page: int = Query(1, ge=1),
+    search: str | None = Query(default=None, description="Search species by name")
+):
     """
-    Retrieve a list of species from the SWAPI.
+    This endpoint retrieves a paginated list of Star Wars species from the SWAPI.
     """
     params = {"page": page}
-
     if search:
         params["search"] = search
 
-    data = fetch_data("species", params)
-    return data
+    return SpeciesService.fetch_species(params)
 
 @router.get("/{species_id}")
-def get_species_by_id(species_id: int):
+def get_specie(species_id: int):
     """
-    Retrieve details of a specific species by its ID from the SWAPI.
+    This endpoint retrieves details of a specific Star Wars species by its ID from the SWAPI.
     """
-    data = fetch_data(f"species/{species_id}")
-    return data
+    return SpeciesService.fetch_species_by_id(species_id)
