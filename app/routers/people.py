@@ -8,9 +8,7 @@ router = APIRouter()
 async def get_people(
     page: int = Query(1, description="Page number"),
     search: str | None = Query(default=None, description="Search people by name"),
-    gender: str | None = Query(default=None, description="Filter by gender (male, female, etc.)"),
-    eye_color: str | None = Query(default=None, description="Filter by eye color"),
-    hair_color: str | None = Query(default=None, description="Filter by hair color")
+    gender: str | None = Query(default=None, description="Filter by gender (male, female, etc.)")
 ):
     """
     This endpoint retrieves a list of Star Wars people with personalized filters.
@@ -19,9 +17,7 @@ async def get_people(
     params = {
         "page": page,
         "search": search,
-        "gender": gender,
-        "eye_color": eye_color,
-        "hair_color": hair_color
+        "gender": gender
     }
     
     try:
