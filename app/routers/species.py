@@ -4,7 +4,7 @@ from app.services.species_service import SpeciesService
 router = APIRouter()
 
 @router.get("/")
-def get_species(
+async def get_species(
     page: int = Query(1, ge=1),
     search: str | None = Query(default=None, description="Search species by name")
 ):
@@ -15,11 +15,11 @@ def get_species(
     if search:
         params["search"] = search
 
-    return SpeciesService.fetch_species(params)
+    return await SpeciesService.fetch_species(params)
 
 @router.get("/{species_id}")
-def get_specie(species_id: int):
+async def get_specie(species_id: int):
     """
     This endpoint retrieves details of a specific Star Wars species by its ID from the SWAPI.
     """
-    return SpeciesService.fetch_species_by_id(species_id)
+    return await SpeciesService.fetch_species_by_id(species_id)

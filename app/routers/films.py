@@ -4,7 +4,7 @@ from app.services.films_service import FilmsService
 router = APIRouter()
 
 @router.get("/")
-def get_films(
+async def get_films(
     page: int = Query(1, ge=1),
     search: str | None = Query(default=None, description="Search films by title")
 ):
@@ -15,11 +15,11 @@ def get_films(
     if search:
         params["search"] = search
     
-    return FilmsService.fetch_films(params)
+    return await FilmsService.fetch_films(params)
 
 @router.get("/{film_id}")
-def get_film(film_id: int):
+async def get_film(film_id: int):
     """
     This endpoint retrieves details of a specific Star Wars film by its ID from the SWAPI.
     """
-    return FilmsService.fetch_film_by_id(film_id)
+    return await FilmsService.fetch_film_by_id(film_id)

@@ -2,15 +2,10 @@ from app.clients.swapi_client import fetch_data
 
 class PeopleService:
     @staticmethod
-    def fetch_people(params: dict | None = None):
-        """
-        Fetches a paginated list of people from SWAPI.
-        """
-        return fetch_data("people", params)
+    async def fetch_people(params: dict):        
+        data = await fetch_data("people", params)           
+        return data
 
     @staticmethod
-    def fetch_person_by_id(person_id: int):
-        """
-        Fetches details of a specific person by their ID.
-        """
-        return fetch_data(f"people/{person_id}")
+    async def fetch_person_by_id(person_id: int):
+        return await fetch_data(f"people/{person_id}")
