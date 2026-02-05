@@ -55,3 +55,43 @@ paths:
       responses:
         "200":
           description: OK
+  /species:
+    get:
+      summary: Species List
+      operationId: getSpeciesFinal
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /starships:
+    get:
+      summary: Starships List
+      operationId: getStarshipsFinal
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /vehicles:
+    get:
+      summary: Vehicles List
+      operationId: getVehiclesFinal
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /openapi.json:
+    get:
+      summary: OpenAPI Specification
+      operationId: getOpenAPISpec
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
