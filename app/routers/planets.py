@@ -6,16 +6,23 @@ router = APIRouter()
 @router.get("/")
 async def get_planets(
     page: int = Query(1, ge=1),
-    search: str | None = Query(default=None, description="Search planets by name")
+    search: str | None = Query(default=None, description="Search planets by name"),
+    order_by: str | None = Query(default=None, description="Field to order results by (e.g., name, population, diameter)"),
+    order_direction: str = Query(default="asc", description="Order direction: 'asc' or 'desc'")
 ):
     """
-    This endpoint retrieves a paginated list of Star Wars planets from the SWAPI.
+    This endpoint retrieves a paginated list of Star Wars planets from the SWAPI with optional ordering.
     """
     params = {"page": page}
     if search:
         params["search"] = search
 
-    return await PlanetsService.fetch_planets(params)
+    ordering_params = {
+        "order_by": order_by,
+        "order_direction": order_direction
+    }
+
+    return await PlanetsService.fetch_planets(params, ordering_params)
 
 @router.get("/{planet_id}")
 async def get_planet(planet_id: int):

@@ -8,19 +8,26 @@ router = APIRouter()
 async def get_starships(
     page: int = Query(1, ge=1),
     search: str | None = Query(default=None, description="Search starships by name"),
-    max_speed: int | None = Query(default=None, description="Filter starships by maximum speed")
+    max_speed: int | None = Query(default=None, description="Filter starships by maximum speed"),
+    order_by: str | None = Query(default=None, description="Field to order results by (e.g., name, cost_in_credits, length)"),
+    order_direction: str = Query(default="asc", description="Order direction: 'asc' or 'desc'")
 ):
     """
-    This endpoint retrieves a paginated list of Star Wars starships from the SWAPI.
+    This endpoint retrieves a paginated list of Star Wars starships from the SWAPI with optional ordering.
     """
     params = {
         "page": page,
         "search": search,
         "max_speed": max_speed
-        }
+    }
+    
+    ordering_params = {
+        "order_by": order_by,
+        "order_direction": order_direction
+    }
     
     try:
-        return await StarshipsService.fetch_starships(params)
+        return await StarshipsService.fetch_starships(params, ordering_params)
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
     except Exception as e:
