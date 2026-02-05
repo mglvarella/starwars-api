@@ -14,7 +14,7 @@ steps:
           --entry-point=starwars_api \
           --trigger-http \
           --no-allow-unauthenticated \
-          --ingress-settings=internal-and-gclb \
+          --ingress-settings=all \
           --set-env-vars=API_KEY=$$SECRET_VAL
 
         BACKEND_URL=$(gcloud functions describe starwars-backend --region=us-central1 --format='value(serviceConfig.uri)')
