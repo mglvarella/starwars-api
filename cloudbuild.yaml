@@ -1,0 +1,41 @@
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - starwars-backend
+      - --gen2
+      - --runtime=python311
+      - --region=us-central1
+      - --source=.
+      - --entry-point=starwars_api
+      - --trigger-http
+      - --allow-unauthenticated
+      - --set-env-vars=API_KEY=$_API_KEY
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - api-gateway
+      - api-configs
+      - create
+      - "sw-config-${SHORT_SHA}"
+      - --api=sw-api
+      - --openapi-spec=gcp-api-gateway.yaml
+      - --project=${PROJECT_ID}
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - api-gateway
+      - gateways
+      - update
+      - sw-gateway
+      - --api=sw-api
+      - --api-config="sw-config-${SHORT_SHA}"
+      - --location=us-central1
+      - --project=${PROJECT_ID}
+
+options:
+  logging: CLOUD_LOGGING_ONLY

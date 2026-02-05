@@ -1,7 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from app.routers import films, people, planets, species, starships, vehicles
+from app.utils.security import get_api_key
 
-app = FastAPI()
+app = FastAPI(
+    title="Star Wars API - PowerOfData",
+    dependencies=[Depends(get_api_key)]
+)
 
 app.include_router(films.router, prefix="/films", tags=["films"])
 app.include_router(species.router, prefix="/species", tags=["species"])

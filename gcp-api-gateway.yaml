@@ -1,0 +1,28 @@
+swagger: "2.0"
+info:
+  title: Star Wars API Gateway (Universal Proxy)
+  description: Gateway universal que repassa todas as requisições para o FastAPI na Cloud Function.
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+
+# O Gateway agora é apenas um túnel. 
+# Adicione novos endpoints no Python e eles funcionarão automaticamente.
+
+paths:
+  /{path+}:
+    get:
+      summary: Proxy Universal
+      operationId: universalProxy
+      x-google-backend:
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/{path}
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: OK
