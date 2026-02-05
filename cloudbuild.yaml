@@ -1,11 +1,11 @@
 steps:
-  # 1. Busca a chave no Secret Manager e faz o deploy
+  # 1. Deploy da Cloud Function FECHADA para o mundo
+  # Removemos --allow-unauthenticated e adicionamos --ingress-settings=internal-and-cloud-load-balancing
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "bash"
     args:
       - "-c"
       - |
-        # Busca o segredo e armazena em uma variável temporária na memória do build
         SECRET_VAL=$(gcloud secrets versions access latest --secret="STARWARS_API_KEY")
         
         gcloud functions deploy starwars-backend \
@@ -15,7 +15,8 @@ steps:
           --source=. \
           --entry-point=starwars_api \
           --trigger-http \
-          --allow-unauthenticated \
+          --no-allow-unauthenticated \
+          --ingress-settings=internal-and-cloud-load-balancing \
           --set-env-vars=API_KEY=$$SECRET_VAL
 
   # 2. Criar nova configuração do API Gateway
@@ -28,6 +29,7 @@ steps:
       - sw-config-${SHORT_SHA}
       - --api=sw-api
       - --openapi-spec=gcp-api-gateway.yaml
+      - --backend-auth-service-account=587782644081-compute@developer.gserviceaccount.com \
       - --project=${PROJECT_ID}
 
   # 3. Atualizar o Gateway
