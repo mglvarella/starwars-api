@@ -8,7 +8,7 @@ import os
 def starwars_api(request):
     # Debug: vamos ver o que está acontecendo (Isso só aparece no Log Explorer do GCP)
     configured_key = os.getenv("API_KEY", "power-of-data-star-wars-2024")
-    received_key = request.headers.get("access_token")
+    received_key = request.headers.get("x-api-token")
     
     print(f"DEBUG: Path recebido: {request.path}")
     print(f"DEBUG: Chave configurada no ambiente (Tamanho): {len(configured_key) if configured_key else 0}")

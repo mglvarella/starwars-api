@@ -2,7 +2,7 @@ from fastapi import Security, HTTPException, status
 from fastapi.security.api_key import APIKeyHeader
 import os
 
-API_KEY_NAME = "access_token"
+API_KEY_NAME = "x-api-token"
 
 API_KEY = os.getenv("API_KEY", "power-of-data-star-wars-2024")
 

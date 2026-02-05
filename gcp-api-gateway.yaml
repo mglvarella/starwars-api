@@ -11,7 +11,7 @@ produces:
 securityDefinitions:
   api_key:
     type: apiKey
-    name: access_token
+    name: x-api-token
     in: header
 
 paths:
