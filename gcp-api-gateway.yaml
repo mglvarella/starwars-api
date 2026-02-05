@@ -8,9 +8,6 @@ schemes:
 produces:
   - application/json
 
-# Vamos adicionar a definição de segurança novamente, mas não vamos torná-la obrigatória no Gateway.
-# Isso remove o aviso/erro de "Operation does not require an API key".
-
 securityDefinitions:
   api_key:
     type: apiKey
@@ -18,7 +15,6 @@ securityDefinitions:
     in: header
 
 paths:
-  # Nível 1: Captura /people, /planets, /docs, etc.
   /{path}:
     get:
       summary: Proxy Nível 1
@@ -34,7 +30,6 @@ paths:
         "200":
           description: OK
 
-  # Nível 2: Captura /people/1, /planets/3, etc.
   /{path}/{subpath}:
     get:
       summary: Proxy Nível 2
