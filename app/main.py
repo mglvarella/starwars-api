@@ -4,7 +4,8 @@ from app.utils.security import get_api_key
 
 app = FastAPI(
     title="Star Wars API - PowerOfData",
-    dependencies=[Depends(get_api_key)]
+    dependencies=[Depends(get_api_key)],
+    redirect_slashes=True
 )
 
 app.include_router(films.router, prefix="/films", tags=["films"])
