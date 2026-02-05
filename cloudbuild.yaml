@@ -16,7 +16,7 @@ steps:
           --entry-point=starwars_api \
           --trigger-http \
           --no-allow-unauthenticated \
-          --ingress-settings=internal-and-cloud-load-balancing \
+          --ingress-settings=internal-and-gclb \
           --set-env-vars=API_KEY=$$SECRET_VAL
 
   # 2. Criar nova configuração do API Gateway
