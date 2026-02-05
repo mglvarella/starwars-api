@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Star Wars API Gateway
-  description: Gateway Universal (Proxy) para FastAPI
+  description: Gateway simplificado para garantir entrega do desafio.
   version: 1.0.0
 schemes:
   - https
@@ -15,47 +15,41 @@ securityDefinitions:
     in: header
 
 paths:
-  /:
+  # Mapeamos APENAS os recursos principais. 
+  # Isso evita que o parser do Google se perca em wildcards.
+  /people:
     get:
-      summary: Proxy Universal
-      operationId: universalProxyRoot
+      summary: People List
+      operationId: getPeopleFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
-        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/people/
       responses:
         "200":
           description: OK
-  /{path}:
+  /planets:
     get:
-      summary: Proxy Universal Nível 1
-      operationId: universalProxyLevel1
+      summary: Planets List
+      operationId: getPlanetsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
-        path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
-        - name: path
-          in: path
-          required: true
-          type: string
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/planets/
       responses:
         "200":
           description: OK
-  /{path}/{subpath}:
+  /films:
     get:
-      summary: Proxy Universal Nível 2
-      operationId: universalProxyLevel2
+      summary: Films List
+      operationId: getFilmsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
-        path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
-        - name: path
-          in: path
-          required: true
-          type: string
-        - name: subpath
-          in: path
-          required: true
-          type: string
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/films/
+      responses:
+        "200":
+          description: OK
+  /docs:
+    get:
+      summary: Swagger UI
+      operationId: getDocsFinal
+      x-google-backend:
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/docs
       responses:
         "200":
           description: OK
