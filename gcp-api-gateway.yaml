@@ -21,6 +21,7 @@ paths:
       operationId: getPeopleFinal
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: OK
@@ -30,6 +31,7 @@ paths:
       operationId: getPlanetsFinal
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: OK
@@ -39,6 +41,7 @@ paths:
       operationId: getFilmsFinal
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: OK
@@ -48,6 +51,7 @@ paths:
       operationId: getDocsFinal
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: OK
