@@ -29,7 +29,7 @@ steps:
       - sw-config-${SHORT_SHA}
       - --api=sw-api
       - --openapi-spec=gcp-api-gateway.yaml
-      - --backend-auth-service-account=587782644081-compute@developer.gserviceaccount.com \
+      - --backend-auth-service-account=587782644081-compute@developer.gserviceaccount.com
       - --project=${PROJECT_ID}
 
   # 3. Atualizar o Gateway
