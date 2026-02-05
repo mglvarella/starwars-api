@@ -15,8 +15,6 @@ securityDefinitions:
     in: header
 
 paths:
-  # O segredo está aqui: capturamos a raiz e ordenamos que o Google
-  # APENAS ADICIONE o resto do caminho à URL do backend.
   /:
     get:
       summary: Proxy Universal

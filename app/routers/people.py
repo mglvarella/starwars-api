@@ -14,14 +14,17 @@ async def get_people(
     This endpoint retrieves a list of Star Wars people with personalized filters.
     Validation is handled at the service layer.
     """
-    params = {
+    default_params = {
         "page": page,
-        "search": search,
+        "search": search
+    }
+
+    personalized_params = {
         "gender": gender
     }
     
     try:
-        return await PeopleService.fetch_people(params)
+        return await PeopleService.fetch_people(default_params, personalized_params)
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
     except Exception as e:

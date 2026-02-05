@@ -3,10 +3,10 @@ from app.services.filters.people_filters import PeopleFilters
 
 class PeopleService:
     @staticmethod
-    async def fetch_people(params: dict):
-        people = await fetch_data("people")
-        if params:
-            people = PeopleFilters.define_filters(people, params)
+    async def fetch_people(default_params: dict, personalized_params: dict):
+        people = await fetch_data("people", default_params)
+        if personalized_params:
+            people = PeopleFilters.define_filters(people, personalized_params)
         return people         
 
     @staticmethod
