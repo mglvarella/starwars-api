@@ -20,7 +20,7 @@ paths:
       summary: People List
       operationId: getPeopleFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
+        address: BACKEND_URL_PLACEHOLDER
       responses:
         "200":
           description: OK
@@ -29,7 +29,7 @@ paths:
       summary: Planets List
       operationId: getPlanetsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
+        address: BACKEND_URL_PLACEHOLDER
       responses:
         "200":
           description: OK
@@ -38,7 +38,7 @@ paths:
       summary: Films List
       operationId: getFilmsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
+        address: BACKEND_URL_PLACEHOLDER
       responses:
         "200":
           description: OK
@@ -47,7 +47,7 @@ paths:
       summary: Swagger UI
       operationId: getDocsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
+        address: BACKEND_URL_PLACEHOLDER
       responses:
         "200":
           description: OK

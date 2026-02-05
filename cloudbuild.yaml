@@ -19,6 +19,13 @@ steps:
           --ingress-settings=internal-and-gclb \
           --set-env-vars=API_KEY=$$SECRET_VAL
 
+        BACKEND_URL=$(gcloud functions describe starwars-backend --region=us-central1 --format='value(serviceConfig.uri)')
+        echo "Detected Backend URL: $BACKEND_URL"
+
+        sed -i "s|BACKEND_URL_PLACEHOLDER|$BACKEND_URL|g" gcp-api-gateway.yaml
+        
+        cat gcp-api-gateway.yaml
+
   # 2. Criar nova configuração do API Gateway
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
