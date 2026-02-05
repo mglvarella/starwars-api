@@ -6,6 +6,19 @@ import os
 
 @functions_framework.http
 def starwars_api(request):
+    # Debug: vamos ver o que está acontecendo (Isso só aparece no Log Explorer do GCP)
+    configured_key = os.getenv("API_KEY", "power-of-data-star-wars-2024")
+    received_key = request.headers.get("access_token")
+    
+    print(f"DEBUG: Path recebido: {request.path}")
+    print(f"DEBUG: Chave configurada no ambiente (Tamanho): {len(configured_key) if configured_key else 0}")
+    print(f"DEBUG: Chave recebida no Header (Tamanho): {len(received_key) if received_key else 0}")
+    
+    if configured_key == received_key:
+        print("DEBUG: AS CHAVES COMBINAM!")
+    else:
+        print("DEBUG: AS CHAVES NÃO COMBINAM!")
+
     client = TestClient(app, follow_redirects=True)
     
     path = request.path if request.path else "/"
