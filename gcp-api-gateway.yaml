@@ -15,14 +15,12 @@ securityDefinitions:
     in: header
 
 paths:
-  # Mapeamos APENAS os recursos principais. 
-  # Isso evita que o parser do Google se perca em wildcards.
   /people:
     get:
       summary: People List
       operationId: getPeopleFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/people/
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
       responses:
         "200":
           description: OK
@@ -31,7 +29,7 @@ paths:
       summary: Planets List
       operationId: getPlanetsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/planets/
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
       responses:
         "200":
           description: OK
@@ -40,7 +38,7 @@ paths:
       summary: Films List
       operationId: getFilmsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/films/
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
       responses:
         "200":
           description: OK
@@ -49,7 +47,7 @@ paths:
       summary: Swagger UI
       operationId: getDocsFinal
       x-google-backend:
-        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app/docs
+        address: https://starwars-backend-r7r24kg6uq-uc.a.run.app
       responses:
         "200":
           description: OK
