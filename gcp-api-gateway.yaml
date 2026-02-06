@@ -45,6 +45,21 @@ paths:
       responses:
         "200":
           description: OK
+  /films/{film_id}/people:
+    get:
+      summary: Film Characters
+      operationId: getFilmPeople
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          type: integer
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
   /docs:
     get:
       summary: Swagger UI

@@ -10,7 +10,12 @@ class PeopleFilters:
         response["results"] = people
         return response
 
-    
+    @staticmethod
+    def filter_results(results: list, params: dict) -> list:
+        if gender := params.get("gender"):
+            results = PeopleFilters.filter_by_gender(results, gender)
+        return results
+
     @staticmethod
     def filter_by_gender(people: list, gender: str) -> list:
         gender = gender.lower()

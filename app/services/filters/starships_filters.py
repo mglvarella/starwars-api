@@ -15,6 +15,13 @@ class StarshipsFilters:
         return response
 
     @staticmethod
+    def filter_results(results: list, params: dict) -> list:
+        maximum_speed = params.get("max_speed")
+        if maximum_speed is not None:
+            results = StarshipsFilters.filter_by_maximum_speed(results, maximum_speed)
+        return results
+
+    @staticmethod
     def filter_by_maximum_speed(starships: list, maximum_speed) -> list:
         max_speed = safe_int(maximum_speed)
         if max_speed is None:

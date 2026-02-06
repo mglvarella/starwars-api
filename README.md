@@ -142,6 +142,21 @@ GET /starships?order_by=cost_in_credits&order_direction=desc
 - **Aplicação Pós-Filtros:** A ordenação é sempre aplicada após os filtros personalizados, garantindo que apenas os dados filtrados sejam ordenados
 - **Case Insensitive:** Ordenação textual não diferencia maiúsculas de minúsculas
 
+## 📄 Sistema de Paginação Inteligente
+
+Quando filtros personalizados ou ordenação são utilizados, a API automaticamente:
+
+1. Busca **todos os resultados** da SWAPI
+2. Aplica os filtros personalizados
+3. Aplica a ordenação
+4. Re-pagina os resultados em grupos de 10
+
+Isso garante que o `count` e a paginação estejam sempre corretos, mesmo com filtros aplicados.
+
+**Sem filtros/ordenação:** Usa paginação direta da SWAPI (mais rápido)
+
+**Com filtros/ordenação:** Busca tudo, processa e re-pagina (resultados consistentes)
+
 ### Arquitetura
 
 O sistema de ordenação está implementado em:
@@ -176,12 +191,34 @@ app/
 | GET | `/planets/{id}` | Detalhes de um planeta |
 | GET | `/films` | Lista filmes |
 | GET | `/films/{id}` | Detalhes de um filme |
+| GET | `/films/{id}/people` | Personagens de um filme |
 | GET | `/species` | Lista espécies |
 | GET | `/species/{id}` | Detalhes de uma espécie |
 | GET | `/starships` | Lista naves |
 | GET | `/starships/{id}` | Detalhes de uma nave |
 | GET | `/vehicles` | Lista veículos |
 | GET | `/vehicles/{id}` | Detalhes de um veículo |
+
+### Endpoints de Relacionamento
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/films/{id}/people` | Retorna todos os personagens que aparecem no filme |
+
+**Exemplo:**
+```bash
+GET /films/1/people
+GET /films/1/people?order_by=name&order_direction=asc
+```
+
+**Resposta:**
+```json
+{
+    "count": 18,
+    "film": "A New Hope",
+    "results": [...]
+}
+```
 
 ### Parâmetros Comuns
 
