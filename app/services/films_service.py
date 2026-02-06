@@ -31,13 +31,7 @@ class FilmsService:
         film = await fetch_data(f"films/{film_id}")
         character_urls = film.get("characters", [])
         
-        async def fetch_character(url: str):
-            client = await SwapiClient.get_client()
-            response = await client.get(url)
-            response.raise_for_status()
-            return response.json()
-        
-        tasks = [fetch_character(url) for url in character_urls]
+        tasks = [SwapiClient.fetch_url(url) for url in character_urls]
         people = await asyncio.gather(*tasks)
         
         if ordering_params and ordering_params.get("order_by"):
