@@ -1,14 +1,20 @@
 import httpx
+import asyncio
 
 BASE_URL = "https://swapi.dev/api"
 
 class SwapiClient:
     _client = None
+    _loop = None
 
     @classmethod
     async def get_client(cls):
-        if cls._client is None or cls._client.is_closed:
-            cls._client = httpx.AsyncClient(timeout=10)
+        current_loop = asyncio.get_running_loop()
+        if cls._client is None or cls._client.is_closed or cls._loop != current_loop:
+            if cls._client and not cls._client.is_closed:
+                await cls._client.aclose()
+            cls._client = httpx.AsyncClient(timeout=30)
+            cls._loop = current_loop
         return cls._client
 
     @staticmethod
@@ -54,4 +60,5 @@ async def fetch_data(endpoint: str, params: dict | None = None):
 
 async def fetch_all_data(endpoint: str, params: dict | None = None):
     return await SwapiClient.fetch_all(endpoint, params)
+
 
