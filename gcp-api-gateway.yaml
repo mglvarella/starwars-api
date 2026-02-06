@@ -18,7 +18,22 @@ paths:
   /people:
     get:
       summary: People List
-      operationId: getPeopleFinal
+      operationId: getPeopleList
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /people/{person_id}:
+    get:
+      summary: Person Detail
+      operationId: getPersonDetail
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          type: integer
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -28,7 +43,22 @@ paths:
   /planets:
     get:
       summary: Planets List
-      operationId: getPlanetsFinal
+      operationId: getPlanetsList
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /planets/{planet_id}:
+    get:
+      summary: Planet Detail
+      operationId: getPlanetDetail
+      parameters:
+        - name: planet_id
+          in: path
+          required: true
+          type: integer
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -38,7 +68,22 @@ paths:
   /films:
     get:
       summary: Films List
-      operationId: getFilmsFinal
+      operationId: getFilmsList
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /films/{film_id}:
+    get:
+      summary: Film Detail
+      operationId: getFilmDetail
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          type: integer
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -60,20 +105,25 @@ paths:
       responses:
         "200":
           description: OK
-  /docs:
+  /species:
     get:
-      summary: Swagger UI
-      operationId: getDocsFinal
+      summary: Species List
+      operationId: getSpeciesList
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: OK
-  /species:
+  /species/{species_id}:
     get:
-      summary: Species List
-      operationId: getSpeciesFinal
+      summary: Species Detail
+      operationId: getSpeciesDetail
+      parameters:
+        - name: species_id
+          in: path
+          required: true
+          type: integer
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -83,7 +133,22 @@ paths:
   /starships:
     get:
       summary: Starships List
-      operationId: getStarshipsFinal
+      operationId: getStarshipsList
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /starships/{starship_id}:
+    get:
+      summary: Starship Detail
+      operationId: getStarshipDetail
+      parameters:
+        - name: starship_id
+          in: path
+          required: true
+          type: integer
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -93,7 +158,42 @@ paths:
   /vehicles:
     get:
       summary: Vehicles List
-      operationId: getVehiclesFinal
+      operationId: getVehiclesList
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /vehicles/{vehicle_id}:
+    get:
+      summary: Vehicle Detail
+      operationId: getVehicleDetail
+      parameters:
+        - name: vehicle_id
+          in: path
+          required: true
+          type: integer
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /docs:
+    get:
+      summary: Swagger UI
+      operationId: getSwaggerDocs
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+  /redoc:
+    get:
+      summary: ReDoc
+      operationId: getRedoc
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
